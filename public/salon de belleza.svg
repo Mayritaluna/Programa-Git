@@ -1,0 +1,16 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <!-- Fondo negro circular -->
+    <circle cx="100" cy="100" r="100" fill="#000000" />
+
+    <!-- Texto "SALÓN DE BELLEZA" en la parte superior -->
+    <text x="50%" y="35%" text-anchor="middle" font-family="Arial" font-size="14" fill="#ff69b4" font-style="italic">
+      SALÓN DE BELLEZA
+    </text>
+    
+    <!-- Texto "JMC" en el centro -->
+    <text x="50%" y="55%" text-anchor="middle" font-family="Arial" font-size="40" fill="#ff69b4" font-style="italic">
+      JMC
+    </text>
+  </g>
+</svg>

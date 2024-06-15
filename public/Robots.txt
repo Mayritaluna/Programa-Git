@@ -1,0 +1,11 @@
+*
+Disallow: /private/
+Disallow: /config/
+Disallow: /scripts/
+
+# Permitir el acceso a todo lo demás
+User-agent: *
+Allow: /
+
+# Especificar la ubicación del sitemap
+Sitemap: https://tusitioweb.com/sitemap.xml
