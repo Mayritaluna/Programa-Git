@@ -1,25 +1,42 @@
-import logo from './salon de belleza.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './Login.css'; // Archivo de estilos para el componente
 
-function App() {
+const Login = ({ onLogin }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Aquí podrías realizar la lógica de autenticación (omitiendo por simplicidad)
+
+    // Llamar a la función de prop para indicar que el inicio de sesión fue exitoso
+    onLogin();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section id="loginSection" className="login-section">
+      <h2>Inicio de Sesión</h2>
+      <form id="loginForm" onSubmit={handleSubmit}>
+        <label htmlFor="username">Nombre de usuario:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <label htmlFor="password">Contraseña:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </section>
   );
-}
+};
 
-export default App;
+export default Login;

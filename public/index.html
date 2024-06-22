@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario Salón de Belleza JMC</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="App.css">
     <link rel="icon" href="JMC.ico" type="image/x-icon">
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <style>
+        /* Estilos globales */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -31,7 +33,6 @@
             font-size: 2em;
         }
 
-        /* Main section styles */
         main {
             flex: 1;
             display: flex;
@@ -54,7 +55,6 @@
             color: #ff69b4;
         }
 
-        /* Form styles */
         form {
             display: flex;
             flex-direction: column;
@@ -87,7 +87,6 @@
             background-color: #ff4d8b;
         }
 
-        /* Footer styles */
         footer {
             background-color: #333;
             color: white;
@@ -113,26 +112,121 @@
         <h1>Bienvenido al Sistema de Gestión de Inventario</h1>
     </header>
     <main>
-        <section>
+        <section id="loginSection">
             <h2>Inicio de Sesión</h2>
             <form id="loginForm">
-                <label for="username">Nombre de Usuario:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Nombre de usuario:</label>
+                <input type="text" id="username" name="Maira Luna" required>
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="1100551975" required>
                 <button type="submit">Iniciar Sesión</button>
             </form>
         </section>
+
+        <section id="inventorySection" style="display: none;">
+            <h2>Gestión de Inventario</h2>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Shampoo</td>
+                        <td>10</td>
+                        <td>$20.00</td>
+                        <td><button onclick="editProduct(this)">Editar</button> <button onclick="deleteProduct(this)">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <td>Acondicionador</td>
+                        <td>10</td>
+                        <td>$20.00</td>
+                        <td><button onclick="editProduct(this)">Editar</button> <button onclick="deleteProduct(this)">Eliminar</button></td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+            <form>
+                id="addProductForm">
+                <h3>Agregar Producto</h3>
+                <label for="productName">Nombre del Producto:</label>
+                <input type="text" id="productName" required>
+                <label for="productQuantity">Cantidad:</label>
+                <input type="number" id="productQuantity" required>
+                <label for="productPrice">Precio:</label>
+                <input type="number" step="0.01" id="productPrice" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+        </section>
     </main>
+
     <footer>
         <p>&copy; 2024 Salón de Belleza JMC. Todos los derechos reservados.</p>
         <div id="logo-container">
-            <!-- Conexión del SVG -->
             <img src="salon de belleza.svg" alt="Logo Salón de Belleza JMC" width="200" height="200">
             <img src="logo192.png" alt="Logo 192" width="50" height="50">
-            <img src="logo512.png.png" alt="Logo 512" width="100" height="100">
-            <link rel="robots" href="robots.txt">
+            <img src="logo512.png" alt="Logo 512" width="100" height="100">
         </div>
+        <div id="contacto">
+            <p>Dirección: Calle 123 #12-10, Galeras, Colombia</p>
+            <p>Correo: <a href="www.salondebellezajmc.com">www.salondebellezajmc.com</a></p>
+            <p>Teléfono: <a href="tel:+573022849913">302 284 9913</a></p>
+        </div>
+       
     </footer>
-<body>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const loginSection = document.getElementById('loginSection');
+        const inventorySection = document.getElementById('inventorySection');
+        const inventoryTable = document.getElementById('inventoryTable').getElementsByTagName('tbody')[0];
+        const addProductForm = document.getElementById('addProductForm');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aquí puedes agregar lógica de autenticación
+            loginSection.style.display = 'none';
+            inventorySection.style.display = 'block';
+        });
+
+        addProductForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const productName = document.getElementById('productName').value;
+            const productQuantity = document.getElementById('productQuantity').value;
+            const productPrice = document.getElementById('productPrice').value;
+
+            const newRow = inventoryTable.insertRow();
+            newRow.innerHTML = `
+                <td>${productName}</td>
+                <td>${productQuantity}</td>
+                <td>${productPrice}</td>
+                <td><button onclick="editProduct(this)">Editar</button> <button onclick="deleteProduct(this)">Eliminar</button></td>
+            `;
+
+            addProductForm.reset();
+        });
+
+        function editProduct(button) {
+            const row = button.parentElement.parentElement;
+            const productName = row.cells[0].textContent;
+            const productQuantity = row.cells[1].textContent;
+            const productPrice = row.cells[2].textContent;
+
+            document.getElementById('productName').value = productName;
+            document.getElementById('productQuantity').value = productQuantity;
+            document.getElementById('productPrice').value = productPrice;
+
+            row.remove();
+        }
+
+        function deleteProduct(button) {
+            const row = button.parentElement.parentElement;
+            row.remove();
+        }
+    </script>
+
+</body>
 </html>
